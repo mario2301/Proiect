@@ -1,0 +1,81 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# ssh-keygen -t rsa -b 4096 -C "jenkins"
+
+$os_packages_update = <<SCRIPT
+echo "Update OS packages"
+apt update && apt upgrade -y
+SCRIPT
+
+$docker_install = <<SCRIPT
+#!/bin/bash
+    echo "Docker install..."
+    apt install docker.io -y
+SCRIPT
+
+$jenkins_skip_setup = <<SCRIPT
+#!/bin/bash
+echo "-----Skipping the initial setup------"
+sudo cp -f /vagrant/jenkins.service /lib/systemd/system/jenkins.service
+sudo cp -f /vagrant/config.xml /var/lib/jenkins/config.xml
+sudo systemctl daemon-reload
+sudo systemctl enable jenkins.service
+sudo systemctl start jenkins.service
+
+sleep 1m
+
+SCRIPT
+
+$jenkins_setup_deb_package = <<SCRIPT
+#!/bin/bash
+echo "------I am installing Jenkins dependencies------"
+curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+echo "---I am installing Jenkins-----"
+sudo apt-get update -y
+sudo apt-get install fontconfig openjdk-11-jre -y
+sudo apt-get install jenkins -y
+SCRIPT
+
+$jenkins_install_plugins = <<SCRIPT
+#!/bin/bash
+echo "---------Installing the plugins------------"
+sudo chmod +x /vagrant/plugins.sh
+sudo bash /vagrant/plugins.sh
+chown -R jenkins:jenkins /var/lib/jenkins
+sudo systemctl daemon-reload
+sudo service jenkins restart
+
+sleep 1m
+
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/focal64"
+
+  config.vm.define "CICD" do |j|
+    j.vm.hostname = "CICD"
+    j.vm.network "private_network", ip: "192.168.56.10"
+    j.vm.provision "shell", :inline => $os_packages_update
+    j.vm.provision "shell", :inline => $docker_install
+    j.vm.provision "shell", :inline => $jenkins_setup_deb_package
+    j.vm.provision "shell", :inline => $jenkins_skip_setup
+    j.vm.provision "shell", :inline => $jenkins_install_plugins
+  end
+  config.vm.define "Environment" do |e|
+    e.vm.hostname = "Environment"
+    e.vm.network "private_network", ip: "192.168.56.11"
+    e.vm.provision "shell", :inline => $docker_install
+  end
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   apt-get update
+  #   apt-get install -y apache2
+  # SHELL
+end
