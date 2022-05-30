@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+    stages {
+        stage('Run Container on Env Server'){
+            steps{
+                sshagent(credentials: ['my-ssh-key']) {
+                    sh "ssh -o StrictHostKeyChecking=no jenkins@192.168.56.11 docker network create wantsome"
+                }
+            }
+        }
+    }
+}
