@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "mario2301/p-load_balancer"
+        registry = "mario2301/load_balancer"
         registryCredential = 'dockerhub-cred'
         dockerImage = ''
         dockerFile = 'dockerfile.lb'
