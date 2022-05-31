@@ -79,13 +79,13 @@ function set_authorized_keys {
     mkdir /var/lib/$1/.ssh
   fi
   
-  if [[ ! -f /vagrant/files/jenkins_keys/id_rsa.pub ]]; then
-    echo "Make sure the vagrant folder is mounted and the file jenkins_keys exists!"
+  if [[ ! -f /vagrant/files/sshkeys/id_rsa.pub ]]; then
+    echo "Make sure the vagrant folder is mounted and the file sshkeys exists!"
     exit 1
   fi
  
-  #cat /vagrant/files/jenkins_keys/id_rsa.pub > /var/lib/$1/.ssh/authorized_keys
-  cp /vagrant/files/jenkins_keys/id_rsa.pub /var/lib/$1/.ssh/authorized_keys
+  #cat /vagrant/files/sshkeys/id_rsa.pub > /var/lib/$1/.ssh/authorized_keys
+  cp /vagrant/files/sshkeys/id_rsa.pub /var/lib/$1/.ssh/authorized_keys
 
   chown -R $1:$1 /var/lib/$1/.ssh
   chmod 600 /var/lib/$1/.ssh/authorized_keys
@@ -97,21 +97,21 @@ function set_ssh_keys {
     mkdir /var/lib/$1/.ssh
   fi
   
-  if [[ ! -f /vagrant/files/jenkins_keys/id_rsa.pub ]]; then
-    echo "Make sure the vagrant folder is mounted and the file jenkins.pub exists!"
+  if [[ ! -f /vagrant/files/sshkeys/id_rsa.pub ]]; then
+    echo "Make sure the vagrant folder is mounted and the file id_rsa.pub exists!"
     exit 1
   fi
 
-  # cat /vagrant/files/jenkins_keys/id_rsa.pub > /var/lib/$1/.ssh/id_rsa.pub
-  cp /vagrant/files/jenkins_keys/id_rsa.pub /var/lib/$1/.ssh/id_rsa.pub
+  # cat /vagrant/files/sshkeys/id_rsa.pub > /var/lib/$1/.ssh/id_rsa.pub
+  cp /vagrant/files/sshkeys/id_rsa.pub /var/lib/$1/.ssh/id_rsa.pub
 
-  if [[ ! -f /vagrant/files/jenkins_keys/id_rsa ]]; then
-    echo "Make sure the vagrant folder is mounted and the file jenkins exists!"
+  if [[ ! -f /vagrant/files/sshkeys/id_rsa ]]; then
+    echo "Make sure the vagrant folder is mounted and the file sshkeys exists!"
     exit 1
   fi
 
-  # cat /vagrant/files/jenkins_keys/id_rsa > /var/lib/$1/.ssh/id_rsa
-  cp /vagrant/files/jenkins_keys/id_rsa /var/lib/$1/.ssh/id_rsa
+  # cat /vagrant/files/sshkeys/id_rsa > /var/lib/$1/.ssh/id_rsa
+  cp /vagrant/files/sshkeys/id_rsa /var/lib/$1/.ssh/id_rsa
 
   chown -R $1:$1 /var/lib/$1/.ssh
   chmod 600 /var/lib/$1/.ssh/id_rsa
@@ -155,13 +155,13 @@ function set_authorized_keys {
     mkdir /home/$1/.ssh
   fi
   
-  if [[ ! -f /vagrant/files/jenkins_keys/id_rsa.pub ]]; then
-    echo "Make sure the vagrant folder is mounted and the file jenkins_keys exists!"
+  if [[ ! -f /vagrant/files/sshkeys/id_rsa.pub ]]; then
+    echo "Make sure the vagrant folder is mounted and the file sshkeys exists!"
     exit 1
   fi
  
-  #cat /vagrant/files/jenkins_keys/id_rsa.pub > /var/lib/$1/.ssh/authorized_keys
-  cp /vagrant/files/jenkins_keys/id_rsa.pub /home/$1/.ssh/authorized_keys
+  #cat /vagrant/files/sshkeys/id_rsa.pub > /var/lib/$1/.ssh/authorized_keys
+  cp /vagrant/files/sshkeys/id_rsa.pub /home/$1/.ssh/authorized_keys
 
   chown -R $1:$1 /home/$1/.ssh
   chmod 600 /home/$1/.ssh/authorized_keys
@@ -173,21 +173,21 @@ function set_ssh_keys {
     mkdir /home/$1/.ssh
   fi
   
-  if [[ ! -f /vagrant/files/jenkins_keys/id_rsa.pub ]]; then
-    echo "Make sure the vagrant folder is mounted and the file jenkins.pub exists!"
+  if [[ ! -f /vagrant/files/sshkeys/id_rsa.pub ]]; then
+    echo "Make sure the vagrant folder is mounted and the file id_rsa.pub exists!"
     exit 1
   fi
 
-  # cat /vagrant/files/jenkins_keys/id_rsa.pub > /home/$1/.ssh/id_rsa.pub
-  cp /vagrant/files/jenkins_keys/id_rsa.pub /home/$1/.ssh/id_rsa.pub
+  # cat /vagrant/files/sshkeys/id_rsa.pub > /home/$1/.ssh/id_rsa.pub
+  cp /vagrant/files/sshkeys/id_rsa.pub /home/$1/.ssh/id_rsa.pub
 
-  if [[ ! -f /vagrant/files/jenkins_keys/id_rsa ]]; then
-    echo "Make sure the vagrant folder is mounted and the file jenkins exists!"
+  if [[ ! -f /vagrant/files/sshkeys/id_rsa ]]; then
+    echo "Make sure the vagrant folder is mounted and the file sshkeys exists!"
     exit 1
   fi
 
-  # cat /vagrant/files/jenkins_keys/id_rsa > /home/$1/.ssh/id_rsa
-  cp /vagrant/files/jenkins_keys/id_rsa /home/$1/.ssh/id_rsa
+  # cat /vagrant/files/sshkeys/id_rsa > /home/$1/.ssh/id_rsa
+  cp /vagrant/files/sshkeys/id_rsa /home/$1/.ssh/id_rsa
 
   chown -R $1:$1 /home/$1/.ssh
   chmod 600 /home/$1/.ssh/id_rsa
