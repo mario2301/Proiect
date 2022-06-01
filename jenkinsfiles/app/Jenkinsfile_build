@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "mario2301/application"
+        registry = "mario2301/application-drupal"
         registryCredential = 'dockerhub_cred'
         dockerImage = ''
         dockerFile = 'dockerfile.drupal'

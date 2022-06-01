@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "mario2301/application"
+        registry = "mario2301/application-drupal"
         dockerRun1 = "docker run \
                         --detach \
                         --network proiect \
