@@ -3,7 +3,7 @@ pipeline {
         registry = "mario2301/application"
         registryCredential = 'dockerhub_cred'
         dockerImage = ''
-        dockerFile = 'dockerfile.wp'
+        dockerFile = 'dockerfile.drupal'
     }
     agent any
     stages {
