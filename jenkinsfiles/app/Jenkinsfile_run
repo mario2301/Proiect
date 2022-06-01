@@ -1,0 +1,26 @@
+pipeline {
+    environment {
+        registry = "mario2301/application"
+        dockerRun1 = "docker run \
+                        --detach \
+                        --network proiect \
+                        --name app1 \
+                        ${registry}"
+        dockerRun2 = "docker run \
+                        --detach \
+                        --network proiect \
+                        --name app2 \
+                        ${registry}"
+    }
+    agent any
+    stages {
+       stage('Run Container on Env Server'){
+            steps{
+                sshagent(credentials: ['env_server']) {
+                    sh "ssh -o StrictHostKeyChecking=no jenkins@192.168.56.11 ${dockerRun1}"
+                    sh "ssh -o StrictHostKeyChecking=no jenkins@192.168.56.11 ${dockerRun2}"
+                }
+            }
+        }
+    }
+}
