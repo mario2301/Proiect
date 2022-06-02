@@ -4,7 +4,7 @@ pipeline {
         dockerRun = "docker run \
                         --detach \
                         --publish 80:80 \
-                        --network wantsome \
+                        --network proiect \
                         --name load_balancer \
                         ${registry}"
     }
