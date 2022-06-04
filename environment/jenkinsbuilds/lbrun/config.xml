@@ -20,7 +20,7 @@
       <submoduleCfg class="empty-list"/>
       <extensions/>
     </scm>
-    <scriptPath>jenkinsfiles/app/Jenkinsfile_run</scriptPath>
+    <scriptPath>jenkinsfiles/load_balancer/Jenkinsfile_run</scriptPath>
     <lightweight>true</lightweight>
   </definition>
   <triggers/>
