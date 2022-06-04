@@ -214,6 +214,8 @@ cp -r /vagrant/jenkinsbuilds/apprun /var/lib/jenkins/jobs
 cp -r /vagrant/jenkinsbuilds/lb /var/lib/jenkins/jobs
 cp -r /vagrant/jenkinsbuilds/lbrun /var/lib/jenkins/jobs
 cp -r /vagrant/jenkinsbuilds/network /var/lib/jenkins/jobs
+cp -r /vagrant/jenkinsbuilds/db /var/lib/jenkins/jobs
+cp -r /vagrant/jenkinsbuilds/dbrun /var/lib/jenkins/jobs
 sudo chown -R jenkins:jenkins /var/lib/jenkins/jobs
 
 sudo systemctl restart jenkins.service
