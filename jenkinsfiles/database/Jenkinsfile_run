@@ -1,0 +1,20 @@
+pipeline {
+    environment {
+        registry = "mario2301/database"
+        dockerRun = "docker run \
+                        --detach \
+                        --network proiect \
+                        --name db \
+                        ${registry}"
+    }
+    agent any
+    stages {
+        stage('Run Container on Env Server'){
+            steps{
+                sshagent(credentials: ['my-ssh-key']) {
+                    sh "ssh -o StrictHostKeyChecking=no jenkins@92.168.56.11 ${dockerRun}"
+                }
+            }
+        }
+    }
+}
