@@ -12,7 +12,7 @@ pipeline {
         stage('Run Container on Env Server'){
             steps{
                 sshagent(credentials: ['my-ssh-key']) {
-                    sh "ssh -o StrictHostKeyChecking=no jenkins@92.168.56.11 ${dockerRun}"
+                    sh "ssh -o StrictHostKeyChecking=no jenkins@192.168.56.11 ${dockerRun}"
                 }
             }
         }
