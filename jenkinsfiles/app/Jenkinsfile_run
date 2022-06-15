@@ -14,7 +14,7 @@ pipeline {
     }
     agent any
     stages {
-       stage('Run Container on Env Server'){
+       stage('Run Container on Environment Server'){
             steps{
                 sshagent(credentials: ['env_server']) {
                     sh "ssh -o StrictHostKeyChecking=no jenkins@192.168.56.11 ${dockerRun1}"
